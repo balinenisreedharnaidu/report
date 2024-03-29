@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.3.29)  29 MAR 2024 00:38
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.3.29)  29 MAR 2024 16:04
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -585,8 +585,13 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 114
 
 (C:\Program Files\MiKTeX\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-) [1] [2] [3]
-(ProjectReport.toc [4])
+) [1]
+Overfull \hbox (7.08601pt too wide) in paragraph at lines 154--156
+ \OT1/cmr/m/n/12 We ex-press our sin-cere grat-i-tude to-wards our Team Leader 
+\OT1/cmr/bx/n/12 Mr.Venkata Narasimha
+ []
+
+[2] [3] (ProjectReport.toc [4])
 \tf@toc=\write3
 \openout3 = `ProjectReport.toc'.
 
@@ -628,67 +633,78 @@ Chapter 2.
 
 ] [4]
 Chapter 3.
-<images/major.jpeg, id=50, 794.97pt x 523.9575pt>
-File: images/major.jpeg Graphic file (type jpg)
-<use images/major.jpeg>
-Package pdftex.def Info: images/major.jpeg  used on input line 229.
-(pdftex.def)             Requested size: 412.57405pt x 369.89377pt.
 [5
 
-] [6 <./images/major.jpeg>]
-<images/chunking.png, id=57, 545.6385pt x 315.579pt>
-File: images/chunking.png Graphic file (type png)
-<use images/chunking.png>
-Package pdftex.def Info: images/chunking.png  used on input line 249.
-(pdftex.def)             Requested size: 412.5665pt x 369.90007pt.
- [7]
-<images/vector.png, id=61, 831.105pt x 395.4775pt>
+]
+<images/flowchart.png, id=53, 2093.32062pt x 685.56125pt>
+File: images/flowchart.png Graphic file (type png)
+<use images/flowchart.png>
+Package pdftex.def Info: images/flowchart.png  used on input line 236.
+(pdftex.def)             Requested size: 512.14937pt x 227.61673pt.
+
+Overfull \hbox (59.18147pt too wide) in paragraph at lines 236--237
+ [][] 
+ []
+
+[6 <./images/flowchart.png>] [7]
+<images/devops stack.png, id=61, 1350.54562pt x 222.07968pt>
+File: images/devops stack.png Graphic file (type png)
+<use images/devops stack.png>
+Package pdftex.def Info: images/devops stack.png  used on input line 270.
+(pdftex.def)             Requested size: 512.16168pt x 142.26266pt.
+
+Overfull \hbox (59.19379pt too wide) in paragraph at lines 270--271
+ [][] 
+ []
+
+[8 <./images/devops stack.png>]
+<images/vector.png, id=66, 831.105pt x 395.4775pt>
 File: images/vector.png Graphic file (type png)
 <use images/vector.png>
-Package pdftex.def Info: images/vector.png  used on input line 260.
+Package pdftex.def Info: images/vector.png  used on input line 295.
 (pdftex.def)             Requested size: 412.55861pt x 369.89027pt.
- [8 <./images/chunking.png>] [9 <./images/vector.png>] [10]
+ [9] [10 <./images/vector.png>] [11]
 Chapter 4.
-[11
+[12
 
 ]
-<images/rgukt-01.png, id=77, 452.28975pt x 151.767pt>
+<images/rgukt-01.png, id=81, 452.28975pt x 151.767pt>
 File: images/rgukt-01.png Graphic file (type png)
 <use images/rgukt-01.png>
-Package pdftex.def Info: images/rgukt-01.png  used on input line 291.
+Package pdftex.def Info: images/rgukt-01.png  used on input line 326.
 (pdftex.def)             Requested size: 355.66246pt x 256.10153pt.
- [12] [13 <./images/rgukt-01.png>]
-<images/google-drive.png, id=85, 508.90125pt x 360.1455pt>
+ [13] [14 <./images/rgukt-01.png>]
+<images/google-drive.png, id=89, 508.90125pt x 360.1455pt>
 File: images/google-drive.png Graphic file (type png)
 <use images/google-drive.png>
-Package pdftex.def Info: images/google-drive.png  used on input line 317.
+Package pdftex.def Info: images/google-drive.png  used on input line 352.
 (pdftex.def)             Requested size: 412.58049pt x 312.99432pt.
- [14 <./images/google-drive.png>]
+ [15 <./images/google-drive.png>]
 Chapter 5.
-<Dhoni.png, id=90, 543.2295pt x 226.446pt>
+<Dhoni.png, id=94, 543.2295pt x 226.446pt>
 File: Dhoni.png Graphic file (type png)
 <use Dhoni.png>
-Package pdftex.def Info: Dhoni.png  used on input line 333.
+Package pdftex.def Info: Dhoni.png  used on input line 368.
 (pdftex.def)             Requested size: 412.56859pt x 312.9899pt.
-[15
+[16
 
-] [16 <./Dhoni.png>] [17]
+] [17 <./Dhoni.png>] [18]
 Chapter 6.
-[18
+[19
 
 ]
 Chapter 7.
-[19
+[20
 
 ]
 Chapter 8.
 
-Overfull \hbox (13.89392pt too wide) in paragraph at lines 383--384
+Overfull \hbox (13.89392pt too wide) in paragraph at lines 418--419
 []\OT1/cmr/m/n/12 https://www.analyticsvidhya.com/blog/2023/09/retrieval-augmen
 ted-generation-rag-
  []
 
-[20
+[21
 
 ] (ProjectReport.aux)
  ***********
@@ -702,7 +718,7 @@ LaTeX Warning: There were multiply-defined labels.
  ) 
 Here is how much of TeX's memory you used:
  9865 strings out of 474485
- 183531 string characters out of 5753520
+ 183586 string characters out of 5753520
  1933542 words of memory out of 5000000
  32047 multiletter control sequences out of 15000+600000
  566130 words of font info for 65 fonts, out of 8000000 for 9000
@@ -713,9 +729,9 @@ i600\tcrm1200.pk><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10
 .pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Pro
 gram Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/Mi
 KTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on ProjectReport.pdf (29 pages, 721814 bytes).
+Output written on ProjectReport.pdf (30 pages, 472836 bytes).
 PDF statistics:
- 134 PDF objects out of 1000 (max. 8388607)
+ 138 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  36 words of extra memory for PDF output out of 10000 (max. 10000000)
 

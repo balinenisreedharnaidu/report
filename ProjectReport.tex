@@ -112,7 +112,7 @@ This is to certify that the report entitled \textbf{"Automation of DevOps Proces
 \vspace{2cm}
 \noindent
 \begin{tabular}[t]{@{}l}
-\textbf{Mr. Kumar Anurupam }\\ Internal Supervisor\\Professor\\Dept. of Computer Science Engineering \\RGUKT NUZVID6
+\textbf{Mr. Kumar Anurupam }\\ Internal Supervisor\\Professor\\Dept. of Computer Science Engineering \\RGUKT NUZVID
 \end{tabular}
 \hfill
 \begin{tabular}[t]{@{}r}
@@ -151,7 +151,7 @@ This is to certify that the report entitled \textbf{"Automation of DevOps Proces
 \begin{center}  {\large \bf ACKNOWLEDGEMENT}\end{center}
 \vspace{1cm}
 \setstretch{1.5}
-\hspace{1cm}We express our sincere gratitude towards our Manager \textbf{Mr.Venkata Narasimha Kowru}, SaYukth Technologies Pvt Ltd, and our guide \textbf{Mr.Kalapala Sravan Kumar},
+\hspace{1cm}We express our sincere gratitude towards our Team Leader \textbf{Mr.Venkata Narasimha Kowru}, SaYukth Technologies Pvt Ltd, and our guide \textbf{Mr.Kalapala Sravan Kumar},
 Computer Science Engineering, Rajiv Gandhi University of Knowledge Technologies for his valuable guidance, suggestions, and supervision throughout the work. Without his patronage and guidance, the project would not have taken shape. We would also like to express our regards for his kind approval of the project, time-to-time counseling, and advice. We owe our sincere thanks to the Dept.of Computer Science Engineering, Rajiv Gandhi University of Knowledge Technologies. 
 \newpage
 \vspace*{2cm}
@@ -160,7 +160,7 @@ Computer Science Engineering, Rajiv Gandhi University of Knowledge Technologies 
 \vspace{1cm}
 \noindent 
 \hspace{1cm}
-Introducing Intelligent  Search Assist a personalized cognitive search assistant designed to provide instantaneous user support and information retrieval. By leveraging the Manage Content stage, data retrieval is seamlessly executed from diverse sources like file uploads, website crawls, and FAQs, Youtube Video, Google drive and Images ensuring streamlined organization for efficient search operations. The project's primary objective is to redefine user interaction by delivering personalized and contextually relevant information in real-time, utilizing state-of-the-art Large Language Models (LLMs). Moreover, Intelligent search Assist is equipped to directly deliver answers to user queries from their own knowledge base, thereby enhancing the efficiency and effectiveness of user support processes..
+This project focuses on developing a comprehensive suite of automation scripts tailored for DevOps activities. These scripts are meticulously designed to streamline various facets of DevOps operations, including installation of servers, code deployment via continuous integration and continuous deployment (CI/CD) pipelines, server monitoring and logging, automated security assessments for both source code and system firewalls and back up the data and checking the backups health. By leveraging these automation scripts, organizations can enhance efficiency, reduce manual intervention, and maintain robustness across their DevOps workflows.
 \setstretch{1.3}
 
 
@@ -179,9 +179,9 @@ Introducing Intelligent  Search Assist a personalized cognitive search assistant
 \vspace{1cm}\doublespacing
 \begin{tabular}{l l}
 
-AI & Artificial Intelligence \\
-RAG & Retrieval augmented generation  \\
-LLM & Large Language Model \\
+CI & Continuous Integration \\
+CD & Continuous Deployment  \\
+
 
 
 \end{tabular} 
@@ -190,13 +190,13 @@ LLM & Large Language Model \\
 \pagenumbering{arabic}
 \chapter{Introduction}
 
-\hspace{1cm}Introducing our proposed method for Intelligent Search Assistant, a revolutionary approach to enhancing user interaction and information retrieval. At its core, our method leverages advanced techniques such as Retrieval-Augmented Generation (RAG) with Large Language Models (LLMs). By combining retrieval-based techniques with generative capabilities, we aim to provide users with personalized answers directly from their own knowledge base. This approach ensures that users have access to contextually relevant information tailored to their specific queries and needs.\\
+\hspace{1cm} Introducing our proposed method for automating DevOps processes,  facilitates the seamless installation and configuration of our technology stack on servers, enabling rapid deployment, monitoring, and scalability for new projects. By automating these processes, we aim to reduce setup time to mere minutes, ensure easy configuration of clusters without manual intervention, and provide a framework that simplifies upgrades and testing across different stack configurations.   \\
 \\
-\hspace{1cm}    To efficiently manage and retrieve information, we employ the LangChain framework in conjunction with vector databases. LangChain, a versatile Python library, plays a crucial role in breaking down text from various document formats, such as PDFs, Word documents, and plain text files. Through LangChain's text segmentation capabilities and the utilization of Sentence Transformer, we transform document text into compact yet information-rich embeddings. These embeddings serve as the foundation for efficient storage and retrieval of relevant information during user interactions.\\
+\hspace{1cm}    One key aspect of our automation strategy is the separation of configuration variables, which not only enhances stack upgradability but also promotes ease of testing by allowing us to experiment with different stack configurations effortlessly. These automation pipeline encompasses a range of functionalities aimed at streamlining server management and ensuring robustness in operations. This includes the installation of monitoring stacks with pre-configured dashboards and alert rules, enabling proactive alerts via email for any anomalies or unwanted events occurring on the servers. Additionally, these DevOps processes encompass security measures, compliance checks, and Linux hardening practices to fortify our infrastructure against potential threats.\\
 \\
-\hspace{1cm}Furthermore, our method integrates seamlessly with databases and platforms like Google Drive, expanding the scope of accessible information sources. This integration enables users to retrieve information not only from traditional documents but also from websites, YouTube videos, and other multimedia sources. By providing users with a comprehensive range of information sources, we empower them to find answers to their queries more effectively and efficiently. \\
+\hspace{1cm}  To optimize resource usage and prevent server downtime, our scripts incorporate start and stop scripts that manage service initialization in a sequenced manner, mitigating resource contention issues that could lead to performance bottlenecks.\\
 \\
-\hspace{1cm}In practice, when users submit queries or prompts, our system utilizes the combined power of RAG techniques with LLMs to generate personalized responses. This ensures that users receive accurate and contextually relevant information in real-time. Additionally, the system maintains a record of previous interactions and chat history, fostering continuity and coherence in the user's dialogue with the Intelligent Search Assistant. Overall, our method aims to revolutionize information retrieval, enhancing user autonomy and efficiency in accessing knowledge from diverse sources..\\
+\hspace{1cm}Furthermore, this automation framework extends to data backup and restoration tasks, ensuring data integrity and providing a mechanism to test the health of backups on alternative servers. Custom monitoring dashboards and exporters are also integrated into our scripts, facilitating comprehensive monitoring of backup data health and overall system performance. This report provides a detailed overview of our automation procedures, including the implementation approach, working mechanisms of various scripts, and the benefits accrued in terms of efficiency, reliability, and scalability in our DevOps workflows.\\
 
 
 
@@ -204,74 +204,146 @@ LLM & Large Language Model \\
 \newpage
 \chapter{Background and Related Work}
 \hspace{1cm}
-Traditional chatbot systems have primarily relied on rule-based approaches for generating responses, where fixed rules dictate the bot's behavior and the corresponding answers it provides. However, such rule-based assistants are inherently limited in their flexibility and adaptability. They struggle to handle complex queries and often provide generic or predefined responses, leading to a lack of context and personalized interaction.
+In the realm of DevOps automation, tools such as Puppet, Chef, and Ansible have been extensively utilized to automate server and application configurations. These tools offer both declarative and imperative approaches to define and manage configurations. Puppet, known for its declarative approach, allows users to specify the desired state of a system, while Chef follows an imperative approach where users define the steps to achieve a desired configuration. Ansible, with its agentless architecture and YAML-based playbooks, offers a streamlined way to automate configuration tasks across systems.
+  While these Configuration Management Tools are widely adopted and effective for managing configurations across diverse systems and applications in data center environments, they may not entirely suit our specific needs.
+However, for our project's objectives, which primarily revolve around seamless installation and configuration of technology stacks on servers, these traditional Configuration Management Tools may not provide the level of simplicity, flexibility, and scalability that we require. Our focus is on rapid deployment, easy configuration of clusters, and swift upgrades without manual intervention and setting up monitoring applications stacks along with ensuring security through Linux hardening. This necessitates a tailored approach that provides simplicity, flexibility, and scalability specific to our DevOps workflows and technology stack requirements.
 
+  By recognizing the strengths and limitations of traditional Configuration Management Tools in previous work, we aim to leverage custom Python scripts and a modular architecture to achieve the desired level of automation and configurability. This approach is designed to align closely with our project's objectives, ensuring efficient deployment, easy cluster configuration, and seamless upgrades, all while minimizing manual intervention and complexity.
 
-In contrast, some chatbots utilize separate Natural Language Processing (NLP) engines for understanding user queries and generating responses. While these systems leverage advanced NLP models, they often suffer from integration challenges. External NLP engines may not seamlessly integrate with the chatbot interface, resulting in disjointed user experiences and suboptimal performance.
-
-Moreover, relying solely on trained NLP or Natural Language Understanding (NLU) engines poses its own set of challenges. These engines, while capable of understanding and processing natural language inputs, may lack the contextual understanding necessary for meaningful interactions. As a result, users may receive unexpected or irrelevant responses, leading to frustration and dissatisfaction.
-
-To overcome these challenges, we introduce the use of Large Language Models (LLMs) and Retrieval-Augmented Generation (RAG) techniques. By leveraging LLMs, such as GPT-3.5 or GPT-4, our approach enables chatbots to understand and generate responses with greater context and accuracy. Additionally, RAG techniques allow chatbots to retrieve relevant information from large datasets and incorporate it into their responses, further enhancing the quality and relevance of interactions. By integrating these advanced techniques into our chatbot framework, we aim to address the limitations of traditional rule-based and NLP-based approaches, offering users a more seamless and satisfying conversational experience.
+  By acknowledging the strengths and limitations of these tools in previous work, we recognize the need for a tailored approach that aligns more closely with our specific automation goals. This project aims to leverage custom Python scripts and a modular architecture to achieve the desired level of automation and configurability, tailored specifically for our DevOps workflows and technology stack requirements.
 
 
 
 
 \newpage
 \chapter{Methodology}
-\hspace{1cm}For developing the Intelligent Search Assistant involves a systematic approach to building a comprehensive knowledge base and implementing advanced techniques for information retrieval and response generation. Initially, the process begins with data collection, wherein diverse sources of information such as documents, websites, and multimedia content are gathered to establish a rich repository of knowledge. 
+\hspace{1cm}To streamline the installation and configuration processes of the required technology stack components, we have developed Python automation scripts that are integrated into a Jenkins pipeline. This integration allows for seamless checkout of the scripts on the server, simplifying the installation process by accepting the application name as a command-line argument for the respective Python script. The scripts are structured in a way that separates resource URLs, version numbers, data directories, firewall ports, and other parameters into distinct files, facilitating easy modification and upgrades of the stack.
 
-The next step involves generating embeddings from the processed text data. Utilizing the LangChain framework in conjunction with Sentence Transformer, the text is transformed into compact yet information-rich embeddings. These embeddings serve as representations of the underlying document content, facilitating efficient storage and retrieval. Indexing is then performed using LangChain's Chroma vector storage mechanism, enabling quick access to relevant information during user interactions.
+Manually checking out and running these scripts on servers can be a cumbersome task, which is why Jenkins pipelines are utilized to automate these steps. The primary objective of the Jenkins pipeline is to enable one-click installation and configuration of the necessary technology stack components. This streamlined process extends to other applications crucial for developer operations, deployment, and monitoring, all accessible within a few clicks through the Jenkins web console.
 
-Integration plays a pivotal role in expanding the scope of accessible information for users. The Intelligent Search Assistant is seamlessly integrated with databases, platforms like Google Drive, and other relevant sources to augment the knowledge base. Leveraging Retrieval-Augmented Generation (RAG) techniques, the system enhances its ability to generate contextually relevant responses. By retrieving pertinent information from the indexed knowledge base and incorporating it into the response generation process, the system ensures the delivery of personalized and accurate responses to user queries.
+Additionally, beyond installation and configuration, ensuring the security of servers through Linux hardening and implementing data backups is imperative. Another Jenkins pipeline is dedicated to modifying necessary configurations in the Linux hardening script and executing it on the server. This pipeline also includes steps to expose metrics using an exporter and integrate them into the monitoring stack. By building custom exporters, metrics related to backup and restore state are exposed and visualized in Grafana within minutes, providing real-time insights into the system's health and backup status. This comprehensive automation approach significantly reduces manual efforts, enhances system security, and improves visibility into critical metrics for efficient monitoring and management.
+
+
+
+
+
+
+
+
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=145mm , height = 130mm]{images/major.jpeg}
-    \caption{Architecture of RAG Pipleline}
+    \includegraphics[width= 180mm, height = 80mm]{images/flowchart.png}
+    \caption{Flowchart of Automation Processes}
     \label{fig:figure2_2}
 \end{figure}
-\section{Langchain}
-\par  LangChain is an open-source framework designed to simplify the creation of applications using large language models (LLMs). It provides a standard interface for chains, integrates with other tools, and offers end-to-end chains for common applications. Developers can build applications based on combined LLMs (such as GPT-4) with external computation and data sources. LangChain is versatile and can be used for chatbots, code analysis, answering questions, data augmentation, text classification, summarization, and machine translation. Its key concepts include components (modular building blocks), chains (combining components), and agents (enabling LLMs to interact with their environment). LangChain has gained popularity due to its user-friendly approach and active community of contributors and users.
+\section{Jenkins}
+\par  Jenkins is an open source automation server. It helps automate the parts of software development related to building, testing, and deploying, facilitating continuous integration, and continuous delivery. It is a server-based system that runs in servlet containers such as Apache Tomcat. Jenkins plays a crucial role in automating various processes related to installation, configuration, security, monitoring, and management in DevOps workflows.
 
-\subsection{Document Loaders}
-\hspace{1cm} LangChain offers a versatile array of document loaders tailored to diverse data sources. From the Text Loader, adept at processing local .txt files, to the Web Page Loader, facilitating extraction from online sources, LangChain ensures seamless integration of textual data. The YouTube Transcript Loader enhances multimedia analysis by extracting transcripts from videos, while the PDF Loader enables standardized document processing. Moreover, LangChain's integration with third-party tools extends data accessibility, empowering users with a comprehensive data analysis toolkit.
+\subsection{Integration with Version Control}
+\hspace{1cm} Jenkins seamlessly integrates with version control systems like Git, allowing for versioned scripts and configurations. This integration ensures that the latest versions of scripts are pulled from the repository during pipeline execution, promoting version control and traceability.
 
-\section{Embeddings Technique}
-\hspace{1cm} Embeddings play a pivotal role in capturing the semantic meaning and context of textual data within LangChain. Leveraging advanced techniques such as Sentence Transformers, LangChain transforms raw text into compact yet information-rich embeddings. These embeddings serve as dense representations of the underlying document content, facilitating efficient storage, retrieval, and analysis. By utilizing Sentence Transformers, LangChain enhances the quality and effectiveness of embeddings by encoding semantic information and capturing nuanced textual relationships. This integration empowers LangChain to generate embeddings that effectively capture the semantic nuances of textual data, enabling more accurate and contextually relevant analysis and retrieval.
-\section{Chunking}
+\subsection{Pipeline Orchestration}
+\hspace{1cm} Jenkins pipelines orchestrate the entire process from start to finish. This includes steps such as checking out scripts, installing the necessary stack components, configuring the stack, executing Linux hardening scripts, and setting up data backups. Pipelines ensure that these tasks are executed in a specified sequence, reducing errors and ensuring consistency.
+
+\subsection{Automated Script Execution}
+\hspace{1cm} Jenkins facilitates the automated execution of Python automation scripts for installing and configuring the technology stack. By integrating these scripts into Jenkins pipelines, tasks that would otherwise require manual intervention, such as checking out scripts on servers and running them, are automated.
+
+
+\subsection{One-Click Deployment}
+\hspace{1cm} Jenkins enables one-click deployment through its web interface or API. This simplifies the deployment process, allowing users to trigger the entire automation workflow with a single click, as mentioned in the methodology.
+
+\subsection{Monitoring and Visualization}
+\hspace{1cm} Jenkins integrates with monitoring and visualization tools like Grafana, allowing for real-time monitoring of system metrics, backup status, and overall system health. This integration enhances visibility into critical metrics and provides insights for effective monitoring and management.
+
+Overall, Jenkins streamlines and automates the DevOps processes involved in installing, configuring, securing, and monitoring technology stacks, making the entire workflow more efficient, reliable, and scalable.
+
+
+
+\section{DevOps application stack}
 \par
 
-The RecursiveCharacterTextSplitter in LangChain efficiently breaks down documents into manageable segments for processing. Using a recursive approach, it ensures minimal information loss while handling documents of varying lengths effectively. This robust segmentation technique enhances LangChain's ability to process large volumes of text data seamlessly, enabling efficient analysis and retrieval.
+The DevOps application stack refers to the integrated set of software tools, technologies, and services used to automate and streamline the development, deployment, monitoring, and management processes within a DevOps environment. The appplications mentioned below need to be installed in DevOps servers.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=180mm , height = 50mm]{images/devops stack.png}
+    \caption{DevOps pipeline}
+    \label{fig:figure2_2}
+\end{figure}
+
+\begin{itemize}
+  
+
+
+\item \textbf{Git} is a distributed version control system used for tracking changes in source code during software development. It allows multiple developers to collaborate efficiently by managing different versions of files and facilitating merging changes.
+
+\item \textbf{Maven} is a build automation tool primarily used for Java projects to manage project dependencies, build processes, and project lifecycle management. It simplifies the build process by providing a standardized structure, known as Project Object Model (POM), which defines project configuration, dependencies, and build targets. Maven retrieves dependencies from central repositories, allowing developers to easily manage and share libraries across projects. It also supports various plugins for additional functionalities such as testing, packaging, and deployment, making it a popular choice for Java developers for efficient project management and automation.
+
+\item \textbf{TestNG} is a testing framework designed for Java that facilitates the creation and execution of automated tests. It supports a wide range of testing scenarios, including unit, functional, integration, and end-to-end testing. TestNG offers features such as annotations, parameterized testing, test dependency management, and parallel test execution, enhancing test flexibility, readability, and scalability. It is widely used in the Java community for its robust testing capabilities and integration with build tools like Maven and continuous integration platforms like Jenkins.
+
+\item \textbf{SonarQube} is an open-source static code analysis tool used for continuous inspection of code quality and security vulnerabilities. It analyzes code across multiple programming languages, identifying issues such as bugs, code smells, security vulnerabilities, and duplication. SonarQube provides detailed reports, metrics, and visualizations to help developers and teams improve code quality, maintainability, and reliability. It integrates seamlessly into the CI/CD pipeline, allowing for automated code analysis and enforcing code quality standards throughout the development lifecycle.
+
+\item \textbf{PostgreSQL} is used with SonarQube for its scalability, reliability, performance, and security features, ensuring efficient storage and management of code analysis data. SonarQube officially supports PostgreSQL, making it an ideal choice as the database backend for organizations using SonarQube for code quality and security analysis.
+
+ 
+\item \textbf{Snyk} is a developer-first security platform that helps organizations find, fix, and prevent vulnerabilities in open-source libraries and container images. It scans projects and dependencies for known security vulnerabilities and provides actionable insights to remediate issues. Snyk integrates with CI/CD pipelines to automate vulnerability scanning and remediation, ensuring that vulnerabilities are addressed early in the development process. Its continuous monitoring capabilities help organizations stay updated on new vulnerabilities and maintain a secure codebase.
+\end{itemize}
+
+\section{Deployment stack}
+\par In this deployment architecture, incoming traffic first passes through a firewall that acts as a security barrier, filtering and allowing only authorized requests to proceed. Behind the firewall, HAProxy, a high-performance load balancer, distributes the incoming traffic across a cluster of Tomcat servers. These Tomcat servers host the application logic and handle client requests efficiently. The communication between HAProxy and the Tomcat server cluster is optimized for load balancing and fault tolerance, ensuring that the workload is evenly distributed and that the system remains highly available. Additionally, the Tomcat servers are interconnected with Percona XtraDB Cluster, ScyllaDB Cluster, and Redpanda Cluster, forming a robust backend infrastructure for data storage, processing, and messaging. This setup ensures scalability, reliability, and performance for handling diverse workloads and maintaining smooth operations of the overall system.
 
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=145mm , height = 130mm]{images/chunking.png}
-    \caption{Example for chunking}
+    \includegraphics[width=120mm , height = 130mm]{images/deploy.drawio.png}
+    \caption{Server Architecture}
     \label{fig:figure2_2}
 \end{figure}
 
-\section{Vector Store}
-\par The  Chroma vector store, serves as a crucial component for efficient storage and retrieval of embeddings. The Chroma vector store specializes in storing embeddings derived from textual data, enabling quick access and retrieval during processing. It employs a robust indexing mechanism to organize embeddings, facilitating efficient search operations and retrieval of relevant information. Additionally, the Chroma vector store supports various operations such as insertion, deletion, and updating of embeddings, ensuring the integrity and scalability of the stored data. Overall, the vector store, particularly the Chroma vector store, plays a vital role in optimizing the performance and functionality of Intelligent Search Assist by providing a reliable and efficient storage solution for embeddings.
+\par The main objective is to automate the deployment of this application architecture, including the installation and configuration of databases across multiple servers to form clusters. This automation streamlines the setup process, allowing for easy scaling by adding additional database servers to handle increasing loads efficiently. The focus is on creating a seamless infrastructure where Tomcat servers can dynamically distribute the workload among different database clusters, optimizing performance and ensuring high availability.
 
+\begin{itemize}
+\item \textbf{HAProxy} is a high-performance open-source load balancer that efficiently distributes incoming network traffic across multiple backend servers based on customizable rules and algorithms. It helps improve application performance, scalability, and reliability by evenly distributing workloads and managing server resources effectively.
+
+\item \textbf{Apache Tomcat} is an open-source Java-based servlet container that provides a runtime environment for Java web applications. It serves as a web server capable of executing Java servlets and JavaServer Pages (JSP), handling HTTP requests, and generating dynamic content. Tomcat's architecture includes a core servlet container responsible for managing the lifecycle of servlets, along with additional components like Catalina for managing web applications, Coyote for handling HTTP requests, and Jasper for JSP processing, making it a versatile platform for hosting Java web applications.
+
+\item \textbf{Percona XtraDB Cluster} is an open-source, high-availability MySQL clustering solution based on the Percona Server for MySQL. It is designed to provide high performance, scalability, and fault tolerance for database environments. Percona XtraDB Cluster uses synchronous replication between nodes, ensuring data consistency across the cluster while offering automatic node recovery and failover capabilities. Additionally, it supports features like multi-master replication, read and write scalability, and easy integration with existing MySQL applications, making it a robust choice for deploying highly available MySQL databases.
+
+\item \textbf{ScyllaDB} is a distributed NoSQL database built for high performance and low-latency applications. It is designed as a drop-in replacement for Apache Cassandra, providing compatibility with Cassandra Query Language (CQL) and data models while offering superior performance. In a ScyllaDB cluster, data is distributed across multiple nodes for scalability and fault tolerance, with each node capable of handling reads and writes independently. The cluster employs a shared-nothing architecture, where each node operates autonomously and communicates through a gossip protocol for coordination and data replication. ScyllaDB's efficient design and integration with modern hardware technologies make it well-suited for real-time big data workloads and high-throughput applications.
+\item \textbf{Redpanda} is a distributed streaming platform designed for high-performance, low-latency, and scalable data processing. It is built as an alternative to Apache Kafka, offering compatibility with Kafka APIs and tools while providing improved performance and reliability. In a Redpanda cluster, data streams are distributed across nodes for fault tolerance and horizontal scalability, making it suitable for real-time data streaming and event-driven applications.
+\end{itemize}
+
+
+\section{Monitoring Stack}
+\par The automation process encompasses the installation and configuration of various service exporters such as MySQL, Scylla, Redpanda, PostgreSQL, Node, HAProxy, Jenkins, and others. These exporters facilitate the extraction of specific metrics and data from the respective services, making them accessible to Prometheus for centralized monitoring. Prometheus is then configured to collect metrics from these exporters, apply custom requirement alert rules, and store the data in a dedicated time series database configured to maintain data for at least 365 days. Furthermore, Grafana is automated for installation, and customized dashboards are set up to visualize the collected metrics from Prometheus, enabling effective monitoring and analysis of system performance and health. This end-to-end automation enhances operational efficiency, provides real-time insights, and supports proactive management of the entire infrastructure and services.
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=145mm , height = 130mm]{images/vector.png}
-    \caption{Vector Store}
+    \includegraphics[width=140mm , height = 120mm]{images/monstack.png}
+    \caption{Monitoring Stack Architecture}
     \label{fig:figure2_2}
 \end{figure}
 
-\section{Retrivers and chains}
-\par Retrieval in LangChain is instrumental in elevating the quality of responses by efficiently fetching pertinent information based on user queries. Primarily employing semantic search, LangChain calculates numerical vectors for documents and stores them in a vector database optimized for streamlined querying. This methodology enables LangChain to retrieve documents closely aligned with the query vector, ensuring the delivery of contextually relevant results. Moreover, LangChain leverages Retrieval-Augmented Generation (RAG) techniques, amalgamating retrieval and generation processes to generate responses tailored to the context of the query.
+\begin{itemize}
+\item \textbf{Service Exporters: }Service exporters in Prometheus are specialized exporters used for monitoring specific services or applications that don't expose Prometheus-compatible metrics natively. These exporters bridge the gap by translating service-specific metrics into a format that Prometheus can scrape and process. Examples include Node Exporter for system-level metrics, Blackbox Exporter for probing endpoints, and exporters for databases (e.g., MySQL, PostgreSQL) and cloud platforms (e.g., AWS, Azure) to monitor their performance and health metrics within Prometheus.
+\item \textbf{Prometheus: }Prometheus is an open-source monitoring and alerting toolkit designed for collecting and processing metrics from various sources. It offers a multi-dimensional data model, powerful querying language (PromQL), and efficient storage for time-series data. Prometheus scrapes metrics from instrumented applications, services, and systems, providing insights into their performance and health.
+\item \textbf{Prometheus Alertmanager: }Prometheus Alertmanager is a component that manages and handles alerts generated by Prometheus. It provides features like deduplication, grouping, and routing of alerts to different receivers (e.g., email, PagerDuty, Slack) based on predefined rules and configurations. Alertmanager enhances the monitoring experience by ensuring timely and effective response to critical events and incidents.
+\item \textbf{Grafana: }Grafana is an open-source analytics and visualization platform that integrates with Prometheus and other data sources to create interactive and customizable dashboards. It enables users to create visual representations of metrics collected by Prometheus, helping teams to monitor and analyze system performance, identify trends, and gain actionable insights through graphs, charts, and alerts.
+\end{itemize}
 
-Within LangChain, the conversation retrieval chain enhances user interaction by dynamically retrieving relevant context and documents from ongoing conversations. Initiated by a retriever component, this chain fetches pertinent documents or context based on user inputs. Subsequently, these retrieved documents, encompassing prior chat messages and context, are forwarded to a language model for response generation. This collaborative process ensures that responses are not only informed by the user's query but also enriched by contextual cues from ongoing conversations, fostering more meaningful and context-aware interactions.
 
+\section{Linux hardening}
+\par Linux hardening involves implementing various security measures to protect a server from potential threats and vulnerabilities. This includes securing network services, managing user permissions, enabling firewall rules, applying system updates regularly, and configuring audit logs. By hardening Linux systems, organizations can reduce the attack surface, mitigate risks, prevent unauthorized access, and enhance overall system security. In the automated process, the Linux system hardening measures are validated using tools like Lynis. Lynis assesses the security posture of Linux systems by evaluating configuration settings, checking for security best practices adherence, and assigning a security score based on the findings. The requirement is that the Lynis score should be more than 85 percent to proceed with setting up the technology stack.
 
-\section{Prompt Template}
-\par Prompt engineering is a pivotal aspect of working with language models, guiding their behavior to produce desired outputs. In LangChain, prompt templates serve as structured guides for formulating queries. These templates include instructions to the model, few-shot examples, and tailored questions, ensuring clarity and context in interactions. String prompt templates offer concise instructions, while chat prompt templates enable dynamic conversations with multiple turns and context management.
+Additionally, the Lynis score is integrated as a metric in Prometheus, which collects and stores system metrics, including the Lynis score. This metric is then visualized in Grafana, providing a comprehensive view of the server's security status. This automated process not only ensures that the server meets security standards but also provides visibility into the security posture through Grafana dashboards, enabling proactive monitoring and management of system security.
 
-Crafting effective prompts demands a deep understanding of the task and user expectations. Well-designed prompts significantly impact the quality of model responses, requiring experimentation and iteration for fine-tuning.
+ \section{Automating the Data Backup and Restoration}
+\par To automate the data backup process in MySQL and ScyllaDB databases, we will schedule nightly backups at 2:00 am using cron jobs or scheduled tasks. These backup scripts will be designed to capture all necessary data and configurations from both MySQL and ScyllaDB databases, ensuring comprehensive backup coverage. Following the backup process, verification checks will be implemented to ensure data integrity. This includes automatically verifying the number of rows in MySQL tables and the number of columns in ScyllaDB tables within the backup files. Automated scripts or queries will handle these verification checks, comparing the counts in the backup files against the corresponding tables in the production databases.
+
+Next, an automated restoration process will be set up on a separate server to restore the production backups of MySQL and ScyllaDB databases. This segregated server environment ensures a non-disruptive restoration process. Once the restoration is complete, another automated comparison will be conducted to verify the row/column counts between the restored databases and the production databases. If the counts match, indicating successful restoration, the metric will be exposed.
+
+However, if discrepancies are detected during the comparison, indicating a potential issue with the restoration process, an alert will be triggered. The alerting mechanism will be integrated with Prometheus for monitoring purposes. In case of a mismatch in row/column counts, an alert will be sent out to all DevOps engineers via email or Slack channels, ensuring prompt notification and resolution of any backup or restoration issues. This comprehensive automation workflow streamlines the data backup, restoration, verification, and monitoring processes, enhancing data reliability and operational efficiency.
 
 \newpage
 \chapter{Implementation}
