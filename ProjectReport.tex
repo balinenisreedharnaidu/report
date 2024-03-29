@@ -181,6 +181,11 @@ This project focuses on developing a comprehensive suite of automation scripts t
 
 CI & Continuous Integration \\
 CD & Continuous Deployment  \\
+HAProxy & High Availability Proxy \\
+SCP & Secure Copy \\
+SSH & Secure Shell \\
+DNS & Domain Name System \\
+URL & Uniform Resource Locator\\
 
 
 
@@ -260,9 +265,7 @@ Overall, Jenkins streamlines and automates the DevOps processes involved in inst
 
 
 \section{DevOps application stack}
-\par
-
-The DevOps application stack refers to the integrated set of software tools, technologies, and services used to automate and streamline the development, deployment, monitoring, and management processes within a DevOps environment. The appplications mentioned below need to be installed in DevOps servers.
+\par The DevOps application stack refers to the integrated set of software tools, technologies, and services used to automate and streamline the development, deployment, monitoring, and management processes within a DevOps environment. The appplications mentioned below need to be installed in DevOps servers.
 
 \begin{figure}[ht]
     \centering
@@ -344,90 +347,173 @@ Next, an automated restoration process will be set up on a separate server to re
 
 However, if discrepancies are detected during the comparison, indicating a potential issue with the restoration process, an alert will be triggered. The alerting mechanism will be integrated with Prometheus for monitoring purposes. In case of a mismatch in row/column counts, an alert will be sent out to all DevOps engineers via email or Slack channels, ensuring prompt notification and resolution of any backup or restoration issues. This comprehensive automation workflow streamlines the data backup, restoration, verification, and monitoring processes, enhancing data reliability and operational efficiency.
 
+
 \newpage
 \chapter{Implementation}
-\section{Data Preprocessing}
-\par The initial phase of the Intelligent Search Assistant project involves processing a multitude of documents in various formats, including PDFs, Word documents, and plain text files. This diverse range of sources ensures comprehensive data intake for the system. Leveraging the robust capabilities of the LangChain framework, the system meticulously parses the text from these documents, breaking them down into manageable segments. This segmentation not only enhances processing efficiency but also facilitates a more granular understanding of the content, laying the foundation for subsequent steps in the information retrieval process.
+\section{Automating deployment}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=155mm , height = 100mm]{images/jenkins-full.png}
+	\caption{Deployment automation architecture}
+	\label{fig:figure4_1}
+\end{figure}
+\textbf{{\large Jenkins}}
+\par\hspace{1cm} \textbf{Jenkins} is an open-source automation server widely used for continuous integration (CI) and continuous delivery (CD) pipelines. It provides a platform for automating software development processes, including building, testing, and deploying applications. Jenkins is a key tool in the DevOps ecosystem due to its flexibility, extensibility, and large community support. 
+\par\hspace{1cm} Using its "Pipeline as Code" feature, we developed autmation scripts involving intermediate installation and configuration scripts using python. Jenkins Pipeline is written in Groovy, a scripting language that provides a high level of flexibility and expressiveness for defining complex workflows.
 
-\section{Embedding Generation}
-\par Once the text segments are parsed, the system proceeds to transform them into embeddings, which serve as numerical representations of the semantic meaning of the text. This transformation is facilitated by the sophisticated Sentence Transformer technique, which excels in capturing contextual information and semantic relationships within the text segments. By generating embeddings rich in information and context, the system lays the groundwork for efficient storage and retrieval of relevant information, setting the stage for seamless user interactions.
+\par\hspace{1cm} \textbf{Jenkins Master}, is a terminology used to refer the DevOps server which is used to perform DevOps operations on like builds, artiffact generation. Whenever a build is triggered, if configured to get pipeline from git repository, it clones the repository on master server before progressing through build steps.
 
-\section{Vector Storage}
-\par Efficient storage of embeddings is paramount for ensuring quick access to relevant information during user interactions. To this end, the Intelligent Search Assistant leverages LangChain's Chroma vector storage mechanism. This mechanism not only optimizes memory usage but also enhances retrieval speed, thanks to its structured organization of embeddings. By efficiently storing embeddings in a manner conducive to rapid retrieval, the system ensures responsiveness and effectiveness in addressing user queries and prompts, thereby enhancing the overall user experience.
+\par\hspace{1cm}\textbf{Jenkins Agent/Slave}, is a terminology to refer a deployment server where the application needed to be deployed on. It is usually pre-configured from Jenkins Interface along with credentials to access the remote server. An slave can also be used without pre-configuring it's IP and credentials to be used as a deployment server(For which, pipeline should include all necessary information).
 
-\section{User Query Preocessing}
-\par As users submit queries or prompts, the system springs into action, leveraging the Conversation Retrieval Chain to retrieve relevant documents or context. This chain seamlessly integrates retrieval techniques tailored to user input, drawing upon the stored embeddings in the Chroma vector database. By ensuring that the retrieved documents or context are contextually relevant to the user's query, the system enhances the accuracy and usefulness of the responses provided, laying the groundwork for personalized and effective interaction.
+
+\hspace{1cm}\textbf{{\large Pipeline as code}}
+\par\hspace{1cm}Jenkins Pipeline as Code is a concept that changed how software development workflows are managed and executed within Jenkins, an automation server commonly used for continuous integration and continuous delivery (CI/CD) processes. Traditionally, developers would configure their build, test, and deployment tasks manually within the Jenkins user interface. However, with Pipeline as Code, these processes are defined and managed through code, allowing for greater flexibility, repeatability, and scalability in software delivery pipelines.
+
+\par\hspace{1cm} Our approach uses both declarative and scripted pipeline to install, configure, deploy our target application. Pipeline code starts with a "pipeline" block which defines environment variables used for the entire pipeline and agent declaration which concludes if each stage in the pipeline needs to define its custom agent for the script in each step to be run on. The logic for this automation is divided into several stages, each stage performing similar steps aiming to complete the deployment.
+
+\par\hspace{1cm}At its core, Jenkins Pipeline as Code enables developers to define their entire CI/CD workflow in a declarative or scripted format using the Groovy programming language. This workflow script, often referred to as a Jenkinsfile, outlines the stages, tasks, and conditions for building, testing, and deploying applications. By encapsulating the entire pipeline logic in code, teams can version-control, review, and collaborate on their pipeline configurations just like they do with application code.
+
+\subsection{Installation of required application servers}
+\par\hspace{1cm} 
+In the initial phase of website/application deployment, we automate the optimization of the configuration of the rented server from the cloud provider to meet our requirements. This process involves setting up the node's hostname, configuring timezone. And updating the package manager's repository, installing required language support tools such as python3 and other tools which allows downloading files such as gdown. Additionally, automation is employed to configure the hosts file for the server with it's private IP and cluster names, which acts as a local DNS for a machine, serving as a prerequisite for deployment.
+ \par\hspace{1cm} After configuring the server with required specifications, We need to install application servers required by the deploying application such as Percona XtraDB as Relational Database Server,Redpanda as messaging queue, Scylla server as Non-relational database server, Tomcat as a webserver, HAProxy as a loadbalancer. 
+\par\textbf{For each application, several parameters are defined to customize, such as:}
+\begin{itemize}
+	\item Version
+	\item Port (for application servers)
+	\item Installation path
+	\item Download URL/ drive ID(for custom binaries)
+	\item Memory limits (for database, webserver)
+\end{itemize}
+\par\hspace{1cm} All the above parameters are defined in project specific configuration directory with directory identifier starting with project name followed by "ConfigurationFiles". In which, install.conf, configuration.conf files are defined, and for the installation, the script uses parameters which are defined as "paramater = value" format from the install.conf file. And the script splits each line which are not either section headers nor blank lines, into key and values and then declares as variables for usage in the code defining script file. So, the variables are defined on the fly.
+\par\hspace{1cm} The isolation of code from parameters help in organizing code and helps for the script executor to easily understand what's happening.
+
+\subsection{Configuring installed application servers}
+\par\hspace{1cm}After installing requirede application stack, We need to configure them to work with the application. This step include configuring hosts file with clusternames of mysql, scylla, redpanda with the node's private IP. This step also includes creating required directories for applications for data, for error pages to be returned for load balancer, etc. It also includes changing application's default configuration files to the one's we configured in the configuration.conf file(same format as of install.conf), this process includes changing cluster names, data directories to be used, private IP addresse changes, and some important properties changes such as running mysql in bootstrap mode or running scylla with only limited CPUs. This step also includes changing permissions, ownerships for directories that these applications use. And these permissions needs to be given such that if the service is being started by user root, only root user will have access to the required directories. After configuring, the servers are started to reflect the changes.
+
+\subsection{Artifact generation}
+\par\hspace{1cm} An artifact can be seen as a bundled version of code which can be served through application servers specifically designed for the source code language. Such as .war artifact for java based application and .apk for android based applications, .exe for windows applications, etc.
+
+\hspace{1cm}\textbf{{\large Artifact Generation Process}}
+\begin{itemize}
+	\item \textbf{Fetch source code}: Source code from version control system needs to be first cloned into the devops server after which artifact generation process starts, we use github as our version control system to get source code.
+	\item \textbf{Build}: For compiling and building java based web-applications involving spring boot from source code, we use maven tool. And for android based applications, we use gradle as our build tool to generate the artifact.
+	\item \textbf{Testing}:
+	\begin{itemize}
+		 \item \textbf{snyk},is a developer-first security platform that helps organizations find, fix, and prevent vulnerabilities in open-source libraries and container images. It scans projects and dependencies for known security vulnerabilities and provides actionable insights to remediate issues. Snyk integrates with CI/CD pipelines to automate vulnerability scanning and remediation, ensuring that vulnerabilities are addressed early in the development process. Its continuous monitoring capabilities help organizations stay updated on new vulnerabilities and maintain a secure codebase.
+	\item \textbf{SonarQube} is an open-source static code analysis tool used for continuous inspection of code quality and security vulnerabilities. It analyzes code across multiple programming languages, identifying issues such as bugs, code smells, security vulnerabilities, and duplication. SonarQube provides detailed reports, metrics, and visualizations to help developers and teams improve code quality, maintainability, and reliability. It integrates seamlessly into the CI/CD pipeline, allowing for automated code analysis and enforcing code quality standards throughout the development lifecycle.
+Reports generated by SonarQube are made available by adding them as backends to reverse-proxy server nginx. Also for snyk reports.
+	\end{itemize}
+	\item \textbf{Resources generation:} In this step, resources such as server.xml for tomcat, haproxy.cfg, .sql files for base data, files are generated through the devops code provided by the developers which generated configuration files for the application specific configurations which then can be used for deployment.
+
+	\item After generating artifact, resources, the resource files along with artifact are copied to deployment server using sshPut/scp to be used later for completing the deployment.
+\end{itemize}
+
+\subsection{Database schemas}
+\par\hspace{1cm} After resources are copied to the deployment servers, which includes database schemas, base data, user creation files, tomcat configuration files, haproxy configuration file. Then the code from the python scripts which are copied at first are used to run the schemas from the copied folders, and configuration files are copied to thier respective directories.
+And again the servers are restarted to refect the changes and deployment status can be checked after this.
+
+\subsection{Deployment alone automation}
+This step is done through the pre-configured pipeline script through jenkins which is configured to trigger a build when a developer push new code to the main branch. This is where the build gets triggered from, and inside the pipeline code, we test for new changes for code before regernating the artifact and all resources and schemas.
+This pipeline code doesn't include stages which installs and configures the application servers. It only redeploys already existing application on to the deployment server. This pipeline is being utilized in the main automation  pipeline code which performs end-to-end operations which is only required when a rented server is yet to be configured. This pipeline's sole purpose is to publish new changes to the deployment servers.
+
+\subsection{Linux hardening}
+\par Linux hardening involves implementing various security measures to protect a server from potential threats and vulnerabilities. This includes securing network services, managing user permissions, enabling firewall rules, applying system updates regularly, and configuring audit logs. By hardening Linux systems, organizations can reduce the attack surface, mitigate risks, prevent unauthorized access, and enhance overall system security. In the automated process, the Linux system hardening measures are validated using tools like Lynis. Lynis assesses the security posture of Linux systems by evaluating configuration settings, checking for security best practices adherence, and assigning a security score based on the findings. The requirement is that the Lynis score should be more than 85 percent to proceed with setting up the technology stack.
+
+Additionally, the Lynis score is integrated as a metric in Prometheus, which collects and stores system metrics, including the Lynis score. This metric is then visualized in Grafana, providing a comprehensive view of the server's security status. This automated process not only ensures that the server meets security standards but also provides visibility into the security posture through Grafana dashboards, enabling proactive monitoring and management of system security.
+
+\subsection{Monitoring stack installation automation}
+This step is crucial in maintaining in observing server's health and monitor it long-term to take strategic decisions to modify server's architecture to solve any performance issue observed through monitoring. To monitor a server, the deployment server should have installed with exporters.
+\textbf{Exporters such as: }
+\begin{itemize}
+	\item \textbf{Node exporter: } Node exporter exports system metrics such as storage available, CPU usage, System load, Network traffic, System uptime, Process metrics and some custom metrics.
+	\item \textbf{Pushgateway exporter: } Although node exporter exports information about processes, it cannot scrape metrics fast enough to capture short-lived jobs. For such jobs, pushgateway is used.
+	\item \textbf{MySQL exporter: } MySQL exporter helps in exporting important metrics such as Queries per second, Buffer pool size, Connections count, Failed queries, Query size which helps in monitoring database performance and make changes as required.
+	\item \textbf{Blackbox exporter: } BlackBox exporter exports important server statuses such as it checks if a server is up and able to handle requests, and it also checks for the validity of the certificates being used by the servers to serve web-content for end-users.
+\end{itemize}
+\hspace{1cm}\textbf{{\Large Prometheus}}
+
+\par\hspace{1cm}It is a open source system monitoring and alerting tool which pull the metric from client server over http and place the data in to its local data base which works on the principle of time series data base.Prometheus only can pull (or) scrapes data can’t collect the data by its own.so we use some exporters as defined above to collect the data. In our case, prometheus acts as a time-series-database for metrics which are then be displayed on grafana using panels and dashboards.
+
+Automating prometheus installation greatly reduces time as we included the confifuration for the exporters information from which it scrapes different metrics from and stores. All this is defined in the prometheus.yaml file.
+
+Required port numbers and other alert configurations are also defined in the scripts to provide with required configuration to perform its operations.
+
+\hspace{1cm}\textbf{{\Large Grafana}}
+It is a multi-platform open source analytics and interactive visualization web application.that allow you to analyze and display data from various sources in real time.it provides a powerful and flexible way to create interactive dashboards,graphs,charts for monitoring and analyzing metrics,logs,other time series data.
+
+Configurations for installation of grafana is also defined to be customized in the automation scripts, just as prometheus.
+
+\section{Database Backup Automation}
+\par\hspace{1cm} Taking database backups are very crucial in production environments as daily backups are always necessary so as to restore incase of any server failures or data corruptions. Employing an attender/employee to manually take a database backup everyday with very less downtime and when very less users are active is very important in taking data backups. 
+
+\par\hspace{1cm} After backing up the database, checking for database consistency across all tables is crucial to call it a successful backup. And doing the consistency check manually requires checking either number of data rows or exact size across the backup server's database and the production server's, to do this manually, an employee should spend some valuable time at unusual timings.  Also, during backups the database server should be isolated from the webserver, it should neither receive requests or can process them, thereby eliminating all active connections from webserver. For that, the webserver also needs to be disconnected from the load balancer which doesn't process any more upcoming requests(and it should be disconnected for atleast one minute to discard any requests from the messagind queues or from server's buffer. Doing all these processes while ensuring for less downtime is next to impossible to do manually. So, automating this crucial process is quite important and saves a lot of time. And reporting immediately is important and automating this aids in immediate reporting and can be attended quickly.
+\par\hspace{1cm} Automation of database backup is acheived through Jenkins pipeline script which includes below steps to backup, restore, and does consistency check and reports through emails to necessary employees.
+
 \begin{figure}[ht]
-    \centering
-    \includegraphics[width=125mm , height = 90mm]{images/rgukt-01.png}
-    \caption{Q and A On Rgukt Website}
-    \label{fig:figure2_2}
+	\centering
+	\includegraphics{images/backup.png}
+	\caption{Database backup architecture}
+	\label{fig:figure4_2}
 \end{figure}
 
-% \begin{figure}[ht]
-%     \centering
-%     \includegraphics[width=215mm , height = 70mm]{db1.png}
-%     \caption{Natural Question on the SQL Database}
-%     \label{fig:figure2_2}
-% \end{figure}
+\hspace{1cm}\textbf{{\large Backup steps:}}
+\begin{itemize}
+	\item A Pipeline build is triggered in Jenkins server everyday at midnight. 
+	\item  The Database server shouldn't receive any requests. So, webserver(tomcat) is disconnected from load balancer(HAproxy) and waits for one minute to ensure no user request is waiting in server's buffer.
+	\item Using mysqldump, specified database is backedup into a file named with mysql-backup-date.sql. 
+	\item On production server, pipeline generates a report with details such as total number of rows across all tables in the tables and with per row count with date as each row in a log file, total row count is made available in Jenkins server to later compare with restored row count.
+	\item After generating report, the backup file is then copied to backup server using SCP.
+	\item On the backup server, the copied backup file is restored and report is generated in backup server and row count is also made available with Jenkins server to be compared with original data.
+	\item After restoration, the pipeline code checks for the consistency by comparing total row counts from production server and backup server.
+	\item Based on the consistency check, a meaningful metric(pre-defined with custom message with flags) is then exposed using pushgateway to prometheus and a post action is performed based on the backup status.
+\end{itemize}
 
-
-
-
-
-
-\newpage
-\section{Google Drive Integration}
-\par Google Drive integration in the Intelligent Search Assistant facilitates effortless access to files stored in users' Google Drive accounts, enhancing the efficiency of information retrieval processes. The integration begins with OAuth2 authentication to establish a secure connection with Google Drive, ensuring users' data privacy and security. Upon authentication, the system interacts with the Google Drive API to retrieve a list of files and folders, enabling users to specify the target folder for downloading files. Utilizing retrieved file metadata, the system initiates the download process from the specified folder, handling various file formats seamlessly, including documents, spreadsheets, images, and presentations.
-
-Furthermore, the system intelligently determines the appropriate file format and extension based on the MIME type provided by Google Drive, supporting a wide range of formats such as CSV, Excel, and DOCX. To enhance reliability, a retry mechanism is incorporated for file downloads, automatically retrying the download process in case of network issues or timeouts. Additionally, robust error handling mechanisms are implemented to gracefully manage exceptions and communicate errors to users, ensuring a smooth user experience. By seamlessly integrating with Google Drive, the Intelligent Search Assistant empowers users to leverage their existing file repositories for enhanced information retrieval and analysis, thereby facilitating a streamlined workflow and improving productivity.
-\hspace{10pt}
-
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=145mm , height = 110mm]{images/google-drive.png}
-    \caption{Integrating Google-drive data With Intelligent Search Assistant}
-    \label{fig:figure2_2}
-\end{figure}
 
 \newpage
 \chapter{Result}
 \section{Result}
-\par The Intelligent Search Assistant successfully integrates retrieval-augmented generation (RAG) techniques with large language models (LLMs) to deliver personalized and contextually relevant responses to user queries. Through the streamlined process of data preprocessing, embedding generation, and vector storage, the system efficiently organizes and retrieves information from diverse sources, including documents, websites, and multimedia content. Leveraging the LangChain framework and the Sentence Transformer technique, the system transforms textual data into compact embeddings, facilitating quick retrieval and response generation.
-
-Moreover, the integration with Google Drive enables seamless access to users' files, enhancing the breadth and depth of information available for retrieval. By intelligently parsing file metadata and employing robust download mechanisms, the system ensures smooth and reliable access to various file formats, including documents, spreadsheets, images, and presentations. The result is an intelligent search assistant that empowers users to access and analyze information from their Google Drive repositories with ease, ultimately improving productivity and facilitating informed decision-making.
+\par Although complete Installation,Configuration,Deployment pipeline is used to deploy for newly assigned projects or for configuring additional server . It has not yet been extensively used, but tested. Deployment pipeline is being used daily as well as backup pipeline which executes everyday and the following are the output screenshots of thier execution.
 
 \section{Sample Output Screenshots}
-
-\begin{figure}[ht]
+\textbf{{\large Console output for complete pipeline}}
+\begin{figure}[H]
     \centering
-    \includegraphics[width=145mm , height = 110mm]{Dhoni.png}
-    \caption{Making LLM models Up to date with Lagnchain agent}
-    \label{fig:figure2_2}
+    \includegraphics[width=145mm , height = 90mm]{all-deployment-console.png}
+    \caption{Stage view for mySQL backup pipelines}
+    \label{fig:figure5_1}
 \end{figure}
-
+\textbf{{\large Stage view output for deployment pipeline}}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=150mm , height = 65mm]{deployment-stages.png}
+    \caption{Stage view for only deployment pipelines}
+    \label{fig:figure5_1}
+\end{figure}
+\textbf{{\large Stage view output for Backup pipeline}}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=150mm , height = 65mm]{backup-stages.png}
+    \caption{Stage view for mySQL backup pipelines}
+    \label{fig:figure5_1}
+\end{figure}
 
 \section{Requirements}
 \subsection{Software Requirements}
 \begin{itemize}
-\item{LangChain}
-\item{Embeddings Techniques}
-\item{Retrieval-Augmented Generation (RAG) techniques}
-\item{Large Language Models (LLMs)}
-\item{Vector Databases}
-\item{Python}
+\item{Visual studio code editor}
+\item{Python3 or above}
+\item{Git/Github}
 \end{itemize}
 
 \subsection{Hardware Requirements}
 
 \begin{itemize}
-\item{Modern Operating System}
+\item{Ubuntu 22.04}
 \item{4 GB RAM}
-\item{10 GB Free Disk Space}
+\item{20 GB Free Disk Space}
 \item{X86 64-bit CPU(Intel/AMD Architecture)}
 \end{itemize}
-
-
 
 
 \newpage
@@ -437,11 +523,6 @@ Moreover, the integration with Google Drive enables seamless access to users' fi
 \textbf{Continuous Improvement and Adaptability: }The use of Jenkins for continuous integration and continuous delivery (CI/CD) within the automation framework allows for continuous improvement and adaptability. Future work may involve optimizing Jenkins pipelines, incorporating new plugins, and adopting best practices to ensure efficient and scalable CI/CD workflows. \\
 \textbf{Data Integrity and Disaster Recovery: }Automation of data backup processes for MySQL and ScyllaDB databases, along with verification checks and alerting mechanisms, ensures data integrity and enables timely response to potential issues. Future enhancements may include implementing advanced disaster recovery strategies, improving backup efficiency, and integrating with cloud-based backup solutions for enhanced resilience.\\
 Overall, the future scope of this DevOps automation framework is promising, with potential advancements in scalability, security, adaptability, and disaster recovery capabilities. By continuously enhancing and refining the framework, organizations can achieve higher levels of efficiency, reliability, and scalability in their software development and operations workflows.
-
-
-
-
-
 
 
 
@@ -458,6 +539,4 @@ Overall, the future scope of this DevOps automation framework is promising, with
 \item{https://automationqahub.com/how-to-integrate-sonarqube-with-jenkins/}
 \item{https://grafana.com/docs/grafana/latest/getting-started/get-started-grafana-prometheus/}
 \end{itemize}
-
-
 \end{document}
